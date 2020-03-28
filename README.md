@@ -99,10 +99,6 @@ class **ImageItem**(scrapy.**Item**):
 
   编写Spider，自定义爬虫规则，爬取自己所要的网页图片内容。这里我将其命名为imageSpider.py：
 
- 
-
-  
-
 ```python
 class ImageSpider(scrapy.Spider):      
     name='imageSpider'       
@@ -196,11 +192,7 @@ ITEM_PIPELINES = {'baidu.pipelines.BaiduPipeline': 300,
 
  
 
-   对选取好的数据进行处理和存储，这些皆在pipelines.py中实现，而这里先对图片数据进行下载并实现一些简单的预处理，导入Scrapy框架中专用于处理图片的专用管道文件ImagesPipeline，重载get_media_requests和item_completed这两个函数： 
-
- 
-
- 
+   对选取好的数据进行处理和存储，这些皆在pipelines.py中实现，而这里先对图片数据进行下载并实现一些简单的预处理，导入Scrapy框架中专用于处理图片的专用管道文件ImagesPipeline，重载get_media_requests和item_completed这两个函数：
 
 ```python
  from scrapy.pipelines.images import ImagesPipeline  
@@ -217,8 +209,6 @@ ITEM_PIPELINES = {'baidu.pipelines.BaiduPipeline': 300,
 定义DownloadImagePipeline这个类，它继承了ImagesPipeline。在该类中需要重新定义两个函数，其中一个为get_media_requests根据传入的url发起请求，且不需要指定回调函数，因为图像处理管道会自动调用item_completed函数处理图片.
 
 另一个函数item_completed，它用于处理图片路径，代码如下：
-
-  
 
 ```python
 def item_completed(self, results, item, info):        
